@@ -1,7 +1,9 @@
 <template>
   <div class="login-container">
     <!-- 导航栏 -->
-    <van-nav-bar title="登录" class="page-nav-bar"/>
+    <van-nav-bar title="登录" class="page-nav-bar">
+      <van-icon slot="left" name="cross" @click="$router.back()"/>
+    </van-nav-bar>
     <!-- 登录表单 -->
     <van-form @submit="onSubmit" ref="loginForm">
       <van-field
@@ -47,12 +49,7 @@
         </template>
       </van-field>
       <div class="login-btn-wrap">
-        <van-button
-          block
-          type="info"
-          native-type="submit"
-          class="login-btn"
-        >登录</van-button>
+        <van-button block type="info" native-type="submit" class="login-btn">登录</van-button>
       </div>
     </van-form>
   </div>
@@ -104,10 +101,13 @@ export default {
       // 提交表单请求登录
       try {
         const { data: res } = await login(this.user)
-        console.log('成功', res)
+        // console.log('成功', res)
         this.$toast.success('登录成功')
-        console.log(res.data)
+        // console.log(res.data)
         this.$store.commit('setUser', res.data)
+        // 登录成功，跳转回原来页面
+        // back 的方式不严谨，后面讲功能优化的时候再说
+        this.$router.back()
       } catch (err) {
         if (err.response.status === 400) {
           // console.log('手机号或者验证码错误')
