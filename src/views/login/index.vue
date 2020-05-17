@@ -64,7 +64,7 @@ export default {
     return {
       user: {
         //   手机号和验证码
-        mobile: '13911111111',
+        mobile: '13811111111',
         code: '246810'
       },
       userFormRules: {
